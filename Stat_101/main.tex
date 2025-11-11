@@ -1,0 +1,77 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{bm}
+\usetikzlibrary{shapes,arrows,positioning}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{booktabs}
+
+% Page layout
+\geometry{a4paper, margin=1in}
+
+% Custom colors
+\definecolor{harvardcrimson}{RGB}{165, 28, 48}
+\definecolor{lectureblue}{RGB}{0, 76, 151}
+\definecolor{bookgreen}{RGB}{0, 102, 51}
+
+% Custom commands
+\newcommand{\lecture}[1]{\section*{Lecture #1 \hfill \normalsize\textcolor{gray}{Stat 110}}%
+\addcontentsline{toc}{section}{Lecture #1}}
+\newcommand{\bookref}[1]{\textcolor{bookgreen}{\textbf{[Blitzstein #1]}}}
+\newcommand{\important}[1]{\textcolor{harvardcrimson}{\textbf{#1}}}
+\newcommand{\definition}[1]{\begin{tcolorbox}[colback=blue!5!white,colframe=lectureblue,title=Definition] #1 \end{tcolorbox}}
+\newcommand{\theorem}[1]{\begin{tcolorbox}[colback=green!5!white,colframe=bookgreen,title=Theorem] #1 \end{tcolorbox}}
+\newcommand{\example}[1]{\begin{tcolorbox}[colback=yellow!5!white,colframe=orange!50!black,title=Example] #1 \end{tcolorbox}}
+\newcommand{\note}[1]{\begin{tcolorbox}[colback=red!5!white,colframe=red!70!black,title=Note] #1 \end{tcolorbox}}
+\newcommand{\story}[1]{\begin{tcolorbox}[colback=purple!5!white,colframe=purple!70!black,title=Story] #1 \end{tcolorbox}}
+
+\newcommand{\Bin}{\text{Bin}}
+\newcommand{\Bern}{\text{Bern}}
+\newcommand{\HGeom}{\text{HGeom}}
+
+
+% Header with course info
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[L]{\small Stat 101: Introduction to Probability}
+\fancyhead[C]{\small Lecture Notes}
+\fancyhead[R]{\small Harvard University}
+\fancyfoot[C]{\thepage}
+
+\title{\textbf{Stat 110 Lecture Notes}\\Harvard Statistics 110\\by\\Pedro N. Jorge}
+\author{Based on Blitzstein's lectures and book "Introduction to Probability"}
+\date{Fall 2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+\include{lectures/lect_01}
+\newpage
+\include{lectures/lect_02}
+\newpage
+\include{lectures/lect_03}
+\newpage
+\include{lectures/lect_04}
+\newpage
+\include{lectures/lect_05}
+\newpage
+\include{lectures/lect_06}
+\newpage
+\include{lectures/lect_07}
+\newpage
+\include{lectures/lect_08}
+\newpage
+
+\end{document}

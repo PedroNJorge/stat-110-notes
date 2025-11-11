@@ -1,0 +1,79 @@
+\lecture{4: Conditional Probability}
+\textbf{Key Topics:} Independent events, conditional probability definition, Bayes' rule
+
+\subsection*{Lecture Summary}
+\begin{itemize}
+    \item Definition of independent events
+    \item Newton-Pepys problem
+    \item Definition of conditional probability
+    \item Conditional probability theorems
+\end{itemize}
+
+\subsection*{Core Concepts}
+
+\definition{\textbf{Independence of two events} (\bookref{Ch. 2.5})\\
+Events $A$ and $B$ are \textit{independent} if
+$$
+P(A \cap B) = P(A)P(B).
+$$
+If $P(A) > 0$ and $P(B) > 0$, then this is equivalent to
+$$
+P(A|B)  =P(A),
+$$
+and also equivalent to $P(B|A) = P(B)$.
+}
+\note{Independence is completely different from disjointness. If $A$ and $B$ are disjoint, then $P(A\cap B) = 0$, so disjoint events can be independent only if $P(A) = 0$ or $P(B) = 0$. Knowing that $A$ occurs tells us that $B$ definitely did not occur, so $A$ clearly conveys information about $B$, meaning the two events are not independent (except if A or B already has zero probability).}
+
+\definition{\textbf{Independence of three events} (\bookref{Ch. 2.5})\\
+Events $A$, $B$, and $C$ are said to be \textit{independent} if all of the following equations hold:
+\begin{align*}
+    P(A \cap B) &= P(A)P(B),\\
+    P(A \cap C) &= P(A)P(C),\\
+    P(B \cap C) &= P(B)P(C),\\
+    P(A \cap B \cap C) &= P(A)P(B)P(C).
+\end{align*}
+If the first three conditions hold, we say that A, B, and C are \textit{pairwise independent}. Pairwise independence does \textit{not} imply independence: it is possible that just learning about $A$ or just learning about $B$ is of no use in predicting whether $C$ occurred, but learning that both $A$ and $B$ occurred could still be highly relevant for $C$. Here
+is a simple example of this distinction.
+}
+
+\definition{\textbf{Independence of many events} (\bookref{Ch. 2.5})\\
+For $n$ events $A_1, A_2, \dots, A_n$ to be \textit{independent}, we require any pair to satisfy $P(A_i \cap A_j) = P(A_i)P(A_j)$ (for $i \neq j$), any triplet to satisfy $P(A_i \cap A_j \cap A_k) = P(A_i)P(A_j)P(A_k) $ (for $i$, $j$, $k$ distinct), and similarly for all quadruplets, quintuplets, and so on. This can quickly become unwieldy, but later we will discuss other ways to think about independence. For infinitely many events, we say that they are independent if every finite subset of the events is independent.
+}
+
+\definition{\textbf{Conditional probability} (\bookref{Ch. 2.2})\\
+If $A$ and $B$ are events with $P(B) > 0$, then the \textit{conditional probability} of $A$ given $B$, denoted by $P(A|B)$, is defined as
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)}.
+$$
+Here $A$ is the event whose uncertainty we want to update, and $B$ is the evidence we observe (or want to treat as given). We call $P(A)$ the \textit{prior} probability of A and $P(A|B)$ the \textit{posterior} probability of $A$ (“prior” means before updating based on the evidence, and “posterior” means after updating based on the evidence).
+For any event $A$, $P(A|A) = P(A \cap A) / P(A) = 1$. Upon observing that $A$ has occurred, our updated probability for $A$ is 1. If this weren’t the case, we would demand a new definition of conditional probability!
+}
+
+\subsection*{Conditional probability}
+
+\theorem{\textbf{Probability of the intersection of two events} (\bookref{Ch. 2.3})\\
+For any events $A$ and $B$ with positive probabilities,
+$$
+P(A \cap B) = P(B)P(A|B) = P(A)P(B|A).
+$$
+This follows from taking the definition of $P(A|B)$ and multiplying both sides by $P(B)$, and then taking the definition of $P(B|A)$ and multiplying both sides by $P(A)$. We will see that the theorem is in fact very useful, since it often turns out to be possible to find conditional probabilities without going back to the definition.
+}
+
+\theorem{\textbf{Probability of the intersection of $\bm{n}$ events} (\bookref{Ch. 2.3})\\
+For any events $A_1, \dots, A_n$ with $P(A_1, A_2, \dots, A_{n-1}) > 0$,
+$$
+P(A_1, A_2, \dots, A_n) = P(A_1)P(A_2|A_1)P(A_3|A_1, A_2) \cdots P(A_n|A_1, \dots, A_{n-1}).
+$$
+In fact, this is $n!$ theorems in one, since we can permute $A_1, \dots, A_n$ however we want without affecting the left-hand side. Often the right-hand side will be much easier to compute for some orderings than for others. For example,
+$$
+P(A_1, A_2, A_3) = P(A_1)P(A_2 |A_1)P(A_3|A_1,A_2) = P(A_2)P(A_3|A_2)P(A_1|A_2,A_3),
+$$
+and there are 4 other expansions of this form too. It often takes practice and thought to be able to know which ordering to use.
+}
+
+\theorem{\textbf{Bayes' Rule} (\bookref{Ch. 2.3})\\
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}.
+$$
+This follows immediately from the previous theorems, which in turn follow immediately from the definition of conditional probability. Yet Bayes’ rule has important implications and applications in probability and statistics, since it is so often necessary to find conditional probabilities, and often $P(B|A)$ is much easier to find directly than $P(A|B)$ (or vice versa).
+}

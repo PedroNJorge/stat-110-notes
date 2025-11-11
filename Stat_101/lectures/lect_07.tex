@@ -1,0 +1,72 @@
+\lecture{7: Gambler's Ruin and Random Variables}
+\textbf{Key Topics:} Gambler's Ruin, Random Variable
+
+\subsection*{Lecture Summary}
+\begin{itemize}
+    \item Gambler's Ruin
+    \item Random Variable definition and examples
+\end{itemize}
+
+\subsection*{Core Concepts}
+\definition{\textbf{Random variable} (\bookref{Ch. 3.1})\\
+Given an experiment with sample space $S$, a \textit{random variable} (r.v.) is a function from the sample space $S$ to the real numbers $\mathbb{R}$. It is common, but not required, to denote random variables by capital letters.\\
+
+Thus, a random variable $X$ assigns a numerical value $X(s)$ to each possible outcome $s$ of the experiment. The randomness comes from the fact that we have a random experiment (with probabilities described by the probability function $P$); the mapping itself is deterministic.
+}
+
+\subsection*{Gambler's Ruin}
+Two gamblers, A and B, make a sequence of \$1 bets. In each bet, gambler A has probability $p$ of winning, and gambler B has probability $q = 1 - p$ of winning. Gambler A starts with $i$ dollars and gambler B starts with $N - i$ dollars; the total wealth between the two remains constant since every time A loses a dollar, the dollar goes to B, and vice versa.
+
+We can visualize this game as a \textit{random walk} on the integers between 0 and $N$, where $p$ is the probability of going to the right in a given step: imagine a person who starts at position $i$ and, at each time step, moves one step to the right with
+probability $p$ and one step to the left with probability $q = 1 - p$. The game ends when either A or B is ruined, i.e., when the random walk reaches 0 or $N$. What is the probability that A wins the game (walking away with all the money)?\\
+
+\textit{Solution:}
+
+We recognize that this game has a recursive structure: after the first step, it’s exactly the same game, except that A’s wealth is now either $i + 1$ or $i - 1$. Let $p_i$ be the probability that A wins the game, given that A starts with $i$ dollars. We will use first-step analysis to solve for the $p_i$. Let $W$ be the event that A wins the game. By LOTP, conditioning on the outcome of the first round, we have
+\begin{align*}
+    p_i &= P(W|\text{A starts at $i$, wins round 1}) \cdot p + P(W|\text{A starts at $i$, loses round 1}) \cdot q \\
+    &= P(W|\text{A starts at $i+1$}) \cdot p + P(W|\text{A starts at $i-1$}) \cdot q\\
+    &= p_{i+1} \cdot p + p_{i-1} \cdot q
+\end{align*}
+
+This must be true for all $i$ from 1 to $N - 1$, and we also have the boundary conditions $p_0 = 0$ and $p_N = 1$. Now we can solve this equation, called a \textit{difference equation}, to obtain the $p_i$.
+
+The characteristic equation of the difference equation is $px^2 - x + q = 0$, which has roots 1 and $q/p$. If $p \ne q$, these roots are distinct, and the general solution is
+$$
+p_i = A \cdot 1^i + B \cdot \left( \frac{q}{p}\right)^i.
+$$
+Using the boundary conditions $p_0 = 0$ and $p_N = 1$, we get
+$$
+    p_i =
+    \begin{cases}
+        \frac{1 - \left( \frac{q}{p} \right) ^i}{1 - \left( \frac{p}{q} \right) ^N} & \text{if } p \ne q\\
+        \frac{i}{N} & \text{if } p = q 
+    \end{cases}
+$$
+
+\subsection*{Random Variables}
+Let’s consider a coin-tossing example. The structure of the problem is that we have a sequence of trials where there are two possible outcomes for each trial. Here we think of the possible outcomes as $H$ (Heads) and $T$ (Tails), but we could just as well think of them as “success” and “failure” or as 1 and 0, for example.
+
+\example{\textbf{Coin tosses}\\
+Consider an experiment where we toss a fair coin twice. The sample space consists of four possible outcomes: $S = \{HH, HT, TH, TT$\}. Here are some random variables on this space (for practice, you can think up some of your own). Each r.v. is a numerical summary of some
+aspect of the experiment.
+\begin{itemize}
+    \item Let $X$ be the number of Heads. This is a random variable with possible values 0, 1, and 2. Viewed as a function, $X$ assigns the value 2 to the outcome $HH$, 1 to the outcomes $HT$ and $TH$, and 0 to the outcome $TT$. That is,
+    $$
+    X(HH) = 2, X(HT) = X(TH) = 1, X(TT) = 0.
+    $$
+
+    \item Let $Y$ be the number of Tails. In terms of $X$, we have $Y =  2 - X$. In other words, $Y$ and $2 - X$ are the same r.v.: $Y(s) = 2 - X(s)$ for all $s$.
+
+    \item Let $I$ be 1 if the first toss lands Heads and 0 otherwise. Then $I$ assigns the value 1 to the outcomes $HH$ and $HT$ and 0 to the outcomes $TH$ and $TT$. This r.v. is an example of what is called an indicator random variable since it indicates whether the first toss lands Heads, using 1 to mean “yes” and 0 to mean “no”.
+\end{itemize}
+
+We can also encode the sample space as $\{(1, 1),(1, 0),(0, 1),(0, 0)\}$, where 1 is the code for Heads and 0 is the code for Tails. Then we can give explicit formulas for $X$, $Y$, $I$:
+$$
+X(s1, s2) = s1 + s2\text{, } Y (s1, s2) = 2 - s1 - s2\text{,  } I(s1, s2) = s1,
+$$
+where for simplicity we write X(s1, s2) to mean X((s1, s2)), etc.
+}
+
+For most r.v.s we will consider, it is tedious or infeasible to write down an explicit formula in this way. Fortunately, it is usually unnecessary to do so, since (as we saw in this example) there are other ways to define an r.v., and (as we will see
+throughout the rest of this book) there are many ways to study the properties of an r.v. other than by doing computations with an explicit formula for what it maps each outcome $s$ to.

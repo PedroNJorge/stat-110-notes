@@ -1,0 +1,61 @@
+\lecture{1: Probability and Counting}
+\textbf{Key Topics:} Sample spaces, events, naive probability definition, counting
+
+\subsection*{Lecture Summary}
+\begin{itemize}
+\item Definition of sample spaces and events
+\item Introduction to probability in a naive way
+\item Basic principles of counting
+\end{itemize}
+
+\subsection*{Core Concepts}
+
+\definition{\textbf{Sample Space and Event} (\bookref{Ch. 1.2})\\
+The \textbf{sample space}, often denoted by $\Omega$ or $S$, of an experiment is the set of all possible outcomes of the experiment. An \textbf{event} $A$ is a subset of the sample space S, and we say that A \textit{occurred} if the actual outcome is in A.}
+
+\definition{\textbf{Naive definition of Probability} (\bookref{Ch. 2.1})\\
+$P(A) = \frac{|A|}{|S|} =\frac{\# \text{ favorable outcomes}}{\# \text{ possible outcomes}}$ \\
+Assume all outcomes are equally likely and the sample space is finite.}
+
+\definition{\textbf{Binomial Coefficient} (\bookref{Ch. 1.2})\\
+The \textbf{binomial coefficient} $\binom{n}{k}$, read as "$n$ choose $k$", is the number of subsets of size $k$ for a set of size $n$. We are counting the number of ways to choose $k$ objects out of $n$, \textit{without replacement and without order}.
+}
+\subsection*{Counting}
+
+\theorem{\textbf{Multiplication Rule} (\bookref{Ch. 1.4.1})\\
+Consider a compound experiment consisting of two sub-experiments, Experiment A and Experiment B. Suppose that Experiment A has $a$ possible outcomes, and for each of those outcomes Experiment B has $b$ possible outcomes. Then the compound experiment has $ab$ possible outcomes.}
+\note{It is often easier to think about the experiments as being in chronological order, but there is no requirement in the multiplication rule that Experiment A has to be performed before Experiment B.}
+
+\theorem{\textbf{Sampling with replacement} (\bookref{Ch. 1.4.8})\\
+Consider $n$ objects and making $k$ choices from them, one at a time \textit{with replacement} (i.e., choosing a certain object does not preclude it from being chosen again). Then there are $n^k$ possible outcomes (where order matters, in the sense that, e.g., choosing object 3 and then object 7 is counted as a different outcome than choosing object 7 and then object 3.)}
+
+\theorem{\textbf{Sampling without replacement} (\bookref{Ch. 1.4.7})\\
+Consider $n$ objects and making $k$ choices from them, one at a time \textit{without replacement} (i.e., choosing a certain object precludes it from being chosen again). Then there are $n(n - 1)\cdots(n - k + 1)$ possible outcomes for $1 \le k \le n$, and 0 possibilities for $k > n$ (where order matters). By convention, $n(n - 1)\cdots(n - k + 1) = n$ for $k = 1$. \\
+This result also follows directly from the multiplication rule: each sampled ball is again a sub-experiment, and the number of possible outcomes decreases by 1 each time. Note that for sampling $k$ out of $n$ objects without replacement, we need $k \le n$, whereas in sampling with replacement the objects are inexhaustible.}
+
+\note{\textbf{Labelling objects}\\
+Drawing a sample from a population is a very fundamental concept in statistics. It is important to think of the objects or people in the population as named or labeled. For example, if there are $n$ balls in a jar, we can imagine that they have labels from 1 to $n$, even if the balls look the same to the human eye. In the birthday problem, we can give each person an ID (identification) number, rather than thinking of the people as indistinguishable particles or a faceless mob.}
+
+In many counting problems, it is not easy to directly count each possibility once and only once. If, however, we are able to count each possibility exactly $c$ times for some $c$, then we can adjust by dividing by $c$. For example, if we have exactly double-counted each possibility, we can divide by 2 to get the correct count. We call this \textit{adjusting for overcounting}.
+
+\example{Consider a group of four people
+\begin{enumerate}[label=(\alph*)]
+    \item How many ways are there to choose a two-person committee?
+    \item How many ways are there to break the people into two teams of two?
+\end{enumerate}
+(a) By the multiplication rule, there are 4 ways to choose the first person on the committee and 3 ways to choose the second person on the committee, but this counts each possibility twice, since picking 1 and 2 to be on the committee is the same as picking 2 and 1 to be on the committee. Since we have overcounted by a factor of 2, the number of possibilities is $(4 \cdot 3) / 2 = 6$.\\
+(b) Using (a) we see that there are 6 ways to choose one team. This overcounts by a factor of 2, since picking 1 and 2 to be a team is equivalent to picking 3 and 4 to be a team. So the answer is $6/2 = 3$.
+}
+
+\subsection*{Sample Table}
+\begin{center}
+\begin{tabular}{c|cc}
+ & \textbf{Order Matters} & \textbf{Order Doesn't Matter} \\
+\hline
+\textbf{Replace} & $n^k$ & $\binom{n + k - 1}{k}$\\[0.5em]
+\hline
+\textbf{Don't Replace} & $n(n-1)\cdots(n-k-1)$ & $\binom{n}{k}$ \\[0.5em]
+\end{tabular}
+\end{center}
+
+The top right entry will be explained in Lecture 2. The other entries simply come from the multiplication rule and are intuitive.

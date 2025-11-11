@@ -1,0 +1,47 @@
+\lecture{2: Story Proofs, Axioms of Probability}
+\textbf{Key Topics:} Story proofs, general definiton of probability
+
+\subsection*{Lecture Summary}
+\begin{itemize}
+    \item Revisit sampling with replacement and without order
+    \item Story proofs
+    \item General definition of probability
+\end{itemize}
+
+\subsection*{Core Concepts}
+\definition{\textbf{General definition of probability} (\bookref{Ch. 1.6})\\
+A \textit{probability space} consists of a sample space $S$ and a probability function $P$ which takes an event $A \subseteq S$ as input and returns $P(A) \in [ 0, 1]$ as output. The function $P$ must satisfy the following axioms:
+\begin{enumerate}[label=(\arabic*)]
+    \item $P(\emptyset) = 0$, $P(S) = 1$.
+    \item If $A_1, A_2, \dots$ are disjoint events, then
+$$
+P\left( \bigcup^\infty_{j=1} A_j \right) = \sum^\infty_{j=1} P(A_j).
+$$
+\end{enumerate}
+}
+\subsection*{Sampling with replacement and without order}
+
+Pick $k$ times from a set of $n$ objects, where order doesn't matter. The result is $\binom{n+k-1}{k}$ ways. Let's see why by reframing our problem.
+
+Equivalently, we want to know how many ways to put $k$ indistinguishable particles into $n$ distinguishable boxes. We can represent it graphically using '$*$' to represent particles and '$|$' to represent boxes ($n=4$ and $k=6$):
+\begin{equation*}
+    ***||**|*
+\end{equation*}
+There must be $k$ $*$'s and $n-1$ $|$'s. So, in total there are $n+k-1$ symbols and we just need to choose the position of the $*$'s. Therefore, the result is $\binom{n+k-1}{k}$.
+
+\subsection*{Story Proofs (proof by interpretation)}
+
+A \textbf{story proof} is a proof by interpretation. For counting problems, this often means counting the same thing in two different ways, rather than doing tedious algebra. A story proof often avoids messy calculations and goes further than an algebraic proof toward \textit{explaining} why the result is true. The word “story” has several meanings, some more mathematical than others, but a story proof (in the sense in which we’re using the term) is a fully valid mathematical proof.
+
+\example{$$n\binom{n-1}{k-1} = k\binom{n}{k}$$
+Pick $k$ people out of $n$, with one designated as President. There is two different approaches to take:
+\begin{itemize}
+    \item First select who is in the club $\binom{n}{k}$, and one of those $k$ members must be elected President: $k\cdot \binom{n}{k}$
+    \item First choose the President, and then, we need $k-1$ people to be in the club, out of the remaining $n-1$: $n \cdot \binom{n-1}{k-1}$
+\end{itemize}
+}
+
+\example{\textbf{Vandermonde's identity}\\
+$$\binom{m+n}{k} = \sum^k_{j=0} \binom{m}{j}\binom{n}{k-j}$$
+Pick $k$ people out of two distinct groups of $m$ and $n$ people, respectively $G_m$ and $G_n$. This means that if we pick $j$ people from $G_m$, we pick $k-j$ people from $G_n$, since we need to pick $k$ in total. Therefore, we can look at every case, going from picking 0 people from $G_m$ to picking all $k$.
+}

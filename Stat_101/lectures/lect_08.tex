@@ -1,0 +1,128 @@
+\lecture{8: Random Variables and Their Distributions}
+\textbf{Key Topics:} Gambler's Ruin, Random Variable
+
+\subsection*{Lecture Summary}
+\begin{itemize}
+    \item Gambler's Ruin
+    \item Random Variable definition and examples
+\end{itemize}
+
+\subsection*{Core Concepts}
+\definition{\textbf{Discrete random variable} (\bookref{Ch. 3.2})\\
+A random variable $X$ is said to be \textit{discrete} if there is a finite list of values $a_1, a_2, \dots , a_n$ or an infinite list of values $a_1, a_2, \dots$ such that $P(X = a_j \text{ for some $j$}) = P(X\ \in \{a_1, a_2, \dots\}) = 1$. If $X$ is a discrete r.v., then the finite or countably infinite set of values $x$ such that $P(X = x) > 0$ is called the \textit{support} of $X$.
+}
+
+\definition{\textbf{Probability mass function} (\bookref{Ch. 3.2})\\
+The \textit{probability mass function} (PMF) of a discrete r.v. $X$ is the function $p_X$ given by $p_X(x) = P(X = x)$. Note that this is positive if $x$ is in the support of $X$, and 0 otherwise.
+}
+
+\note{
+In writing $P(X = x)$, we are using $X = x$ to denote an event, consisting of all outcomes $s$ to which $X$ assigns the number $x$. This event is also written as $\{X = x\}$; formally, $\{X = x\}$ is defined as $\{s \in S \colon X(s) = x\}$, but writing $\{X = x\}$ is shorter and more intuitive. Going back to the 'Coin toss' example, if $X$ is the number of Heads in two fair coin tosses, then $\{X = 1\}$ consists of the sample outcomes $HT$ and $TH$, which are the two outcomes to which $X$ assigns the number 1. Since $\{HT, TH\}$ is a subset of the sample space, it is an event. So it makes sense to talk about $P(X = 1)$, or more generally, $P(X = x)$. If $\{X = x\}$ were anything other than an event, it would make no sense to calculate its probability! It does not make sense to write “$P(X)$”; we can only take the probability of an event, not of an r.v.
+}
+
+\theorem{\textbf{Valid PMFs} (\bookref{Ch. 3.2})\\
+Let $X$ be a discrete r.v. with support $x_1, x_2, \dots$ (assume these values are distinct and, for notational simplicity, that the support is countably infinite; the analogous results hold if the support is finite). The PMF $p_X$ of $X$ must satisfy the following two criteria:
+\begin{itemize}
+    \item Nonnegative: $p_X(x) > 0$ if $x = x_j$ for some $j$, and $p_X(x) = 0$ otherwise;
+    \item Sums to 1: $\sum_j p_X(x_j) = 1$.
+\end{itemize}
+}
+
+\definition{\textbf{Cumulative distribution function} (\bookref{Ch. 3.6})\\
+The \textit{cumulative distribution function} (CDF) of an r.v. X is the function $F_X$ given by $F_X(x) = P(X \le x)$. When there is no risk of ambiguity, we sometimes drop the subscript and just write F (or some other letter) for a CDF.
+}
+
+\subsection*{Bernoulli and Binomial}
+\definition{\textbf{Bernoulli distribution} (\bookref{Ch. 3.3})\\
+An r.v. $X$ is said to have the \textit{Bernoulli distribution} with parameter $p$ if
+$$
+P(X = 1) = p \quad \text{and} \quad P(X = 0) = 1 - p, \quad\text{where } 0 < p < 1
+$$
+We write this as $X \sim \Bern(p)$. The symbol $\sim$ is read “is distributed as”.
+}
+
+\definition{\textbf{Indicator random variable} (\bookref{Ch. 3.3})\\
+The \textit{indicator random variable} of an event $A$ is the r.v. which equals 1 if $A$ occurs and 0 otherwise. We will denote the indicator r.v. of $A$ by $I_A$ or $I(A)$. Note that $I_A \sim \Bern(p)$ with $p = P(A)$.
+}
+
+\story{\textbf{Bernoulli trial}\\
+An experiment that can result in either a “success” or a “failure” (but not both) is called a \textit{Bernoulli trial}. A Bernoulli random variable can be thought of as the \textit{indicator of success} in a Bernoulli trial: it equals 1 if success occurs and 0 if failure occurs in the trial.
+}
+
+Because of this story, the parameter $p$ is often called the \textit{success probability} of the $\Bern(p)$ distribution. Once we start thinking about Bernoulli trials, it’s hard not to start thinking about what happens when we have more than one trial.
+
+\story{\textbf{Binomial distribution}\\
+Suppose that $n$ independent Bernoulli trials are performed, each with the same success probability $p$. Let $X$ be the number of successes. The distribution of $X$ is called the \textit{Binomial distribution} with parameters $n$ and $p$. We write $X \sim \Bin(n, p)$ to mean that $X$ has the Binomial distribution with parameters $n$ and $p$, where $n$ is a positive integer and $0 < p < 1$.
+}
+
+Notice that we define the Binomial distribution not by its PMF, but by a \textit{story} about the type of experiment that could give rise to a random variable with a Binomial distribution. The most famous distributions in statistics all have stories which explain why they are so often used as models for data, or as the building blocks for more complicated distributions.
+
+Thinking about the named distributions first and foremost in terms of their stories has many benefits. It facilitates pattern recognition, allowing us to see when two problems are essentially identical in structure; it often leads to cleaner solutions that avoid PMF calculations altogether; and it helps us understand how the named distributions are connected to one another. Here it is clear that $\Bern(p)$ is the same distribution as $\Bin(1, p)$: the Bernoulli is a special case of the Binomial.
+
+Using the story definition of the Binomial, let’s find its PMF:
+
+\theorem{\textbf{Binomial PMF} (\bookref{Ch. 3.3})\\
+If $X \sim \Bin(n, p)$, then the PMF of $X$ is
+$$
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+$$
+for $k = 0, 1, \dots , n$ (and $P(X = k) = 0$ otherwise).\\
+
+\textit{Proof:}\\
+An experiment consisting of $n$ independent Bernoulli trials produces a sequence of successes and failures. The probability of any specific sequence of $k$ successes and $n - k$ failures is $p^k (1 - p)^{n-k}$. There are $\binom{n}{k}$ such sequences, since we
+just need to select where the successes are. Therefore, letting $X$ be the number of successes,
+$$
+P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}
+$$
+for $k = 0, 1, \dots , n$, and $P(X = k) = 0$ otherwise. This is a valid PMF because it is nonnegative and it sums to 1 by the binomial theorem.
+}
+
+\note{
+To save writing, it is often left implicit that a PMF is zero wherever it is not specified to be nonzero, but in any case it is important to understand what the support of a random variable is, and good practice to check that PMFs are valid. If two discrete r.v.s have the same PMF, then they also must have the same support.
+So we sometimes refer to the support of a discrete \textit{distribution}; this is the support of any r.v. with that distribution.
+}
+
+\theorem{\textbf{Sum of indicator r.v.s} (\bookref{Ch. 3.8})\\
+If $X \sim \Bin(n, p)$, viewed as the number of successes in $n$ independent Bernoulli trials with success probability $p$, then we can write $X = X_1+ \cdots +X_n$ where the $X_i$ are i.i.d. $\Bern(p)$ (i.i.d. stands for independent, identically distributed).
+}
+
+\theorem{\textbf{Sum of two binomials} (\bookref{Ch. 3.8})\\
+If $X \sim \Bin(n, p)$, $Y \sim \Bin(m, p)$, and $X$ is independent of $Y$, then $X + Y \sim \Bin(n + m, p)$.\\
+
+\textit{Proof.} We present three proofs, since each illustrates a useful technique.\\
+1. Story: By the Binomial story, $X$ is the number of successes in $n$ independent trials and $Y$ is the number of successes in $m$ additional independent trials, all with the same success probability, so $X + Y$ is the total number of successes in the $n + m$ trials, which is the story of the $\Bin(n + m, p)$ distribution.\\
+
+2. Representation: A much simpler proof is to represent both $X$ and $Y$ as the sum of i.i.d. $\Bern(p)$ r.v.s: $X = X_1 + \cdots + X_n$ and $Y = Y_1 + \cdots + Y_m$, where the $X_i$ and $Y_j$ are all i.i.d. $\Bern(p)$. Then $X + Y$ is the sum of $n + m$ i.i.d. $\Bern(p)$ r.v.s, so its distribution, by the previous theorem, is $\Bin(n + m, p)$.
+
+3. LOTP: We can directly find the PMF of $X + Y$ by conditioning on $X$ (or $Y$, whichever we prefer) and using the law of total probability:
+\begin{align*}
+    P(X+Y=k) &= \sum^k_{j=0} P(X+Y=k | X=j)P(X=j)\\
+    &= \sum^k_{j=0} P(Y=k-j)P(X=j)\\
+    &= \sum^k_{j=0} \binom{m}{k-j}p^mq^{m-k+j}\binom{n}{j}p^jq^{n-j}\\
+    &= p^k q^{n+m-k} \sum^k_{j=0} \binom{m}{k-j} \binom{n}{j}\\
+    &= \binom{n+m}{k}p^k q^{n+m-k}
+\end{align*}
+In the second line, we used the independence of X and Y to justify dropping the conditioning. In the last line, we used Vermonde's identity.
+}
+
+\subsection*{Hypergeometric}
+If we have an urn filled with $w$ white and $b$ black balls, then drawing $n$ balls out of the urn with replacement yields a $\Bin(n, w/(w + b))$ distribution for the number of white balls obtained in $n$ trials, since the draws are independent Bernoulli trials, each with probability $w/(w+b)$ of success. If we instead sample \textit{without replacement}, then the number of white balls follows a \textit{Hypergeometric distribution}.
+
+\story{\textbf{Hypergeometric distribution}\\
+Consider an urn with $w$ white balls and $b$ black balls. We draw $n$ balls out of the urn at random without replacement, such that all $\binom{w+b}{n}$ samples are equally likely. Let $X$ be the number of white balls in the sample. Then $X$ is said to have the \textit{Hypergeometric distribution} with parameters $w$, $b$, and n  $n$; we denote this by $X \sim \HGeom(w, b, n)$.
+}
+
+\theorem{\textbf{Hypergeometric PMF} (\bookref{Ch. 3.4})\\
+If $X \sim \HGeom(w, b, n)$, then the PMF of $X$ is
+$$
+P(X=k) = \frac{\binom{w}{k} \binom{b}{n-k}}{\binom{w+b}{n}},
+$$.
+for integers $k$ satisfying $0 \le k \le w$ and $0 \le n-k \le b$, and $P(X = k) = 0$ otherwise.\\
+
+\textit{Proof:}\\
+To get $P(X = k)$, we first count the number of possible ways to draw exactly $k$ white balls and $n - k$ black balls from the urn (without distinguishing between different orderings for getting the same set of balls). If $k > w$ or $n - k > b$, then the draw is impossible. Otherwise, there are $\binom{w}{k} \binom{b}{n-k}$ ways to draw $k$ white and $n - k$ black balls by the multiplication rule, and there are $\binom{w+b}{n}$ total ways to draw $n$ balls. Since all samples are equally likely, the naive definition of probability gives
+$$
+P(X=k) = \frac{\binom{w}{k} \binom{b}{n-k}}{\binom{w+b}{n}}
+$$
+for integers $k$ satisfying $0 \le k \le w$ and $0 \le n-k \le b$. This PMF is valid because the numerator, summed over all $k$, equals $\binom{w+b}{n}$ by Vandermonde’s identity, so the PMF sums to 1.
+}
